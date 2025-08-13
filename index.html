@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeling Good - Consultoria Científica e Serviços</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3f51b5;
+            --secondary: #5c6bc0;
+            --dark: #303f9f;
+            --light: #e8eaf6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .navbar {
+            background-color: var(--primary) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe');
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .badge-discount {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f44336;
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-btn {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            z-index: 100;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .offcanvas-cart {
+            width: 400px !important;
+        }
+        
+        .scientific-badge {
+            background-color: #4caf50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .currency {
+            font-size: 0.8em;
+        }
+        
+        @media (max-width: 768px) {
+            .offcanvas-cart {
+                width: 100% !important;
+            }
+            
+            .whatsapp-float, .cart-btn {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .cart-btn {
+                bottom: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-flask me-2"></i>Feeling Good
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-light ms-3 d-none d-lg-block" id="whatsappBtn">
+                    <i class="fab fa-whatsapp me-2"></i>Fale Conosco
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Feeling Good Consultoria Científica</h1>
+            <p class="lead mb-4">Soluções baseadas em evidências para saúde e bem-estar</p>
+            <a href="#products" class="btn btn-primary btn-lg px-4 py-2">
+                <i class="fas fa-shopping-basket me-2"></i>Conheça Nossos Produtos
+            </a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="container mb-5">
+        <div class="row text-center g-4">
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded bg-white">
+                    <i class="fas fa-microscope text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h5>Base Científica</h5>
+                    <p class="mb-0">Produtos desenvolvidos com pesquisa</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded bg-white">
+                    <i class="fas fa-leaf text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h5>100% Natural</h5>
+                    <p class="mb-0">Ingredientes naturais e seguros</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded bg-white">
+                    <i class="fas fa-truck text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h5>Entrega Rápida</h5>
+                    <p class="mb-0">Entregamos em todo Moçambique</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded bg-white">
+                    <i class="fas fa-shield-alt text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h5>Garantia</h5>
+                    <p class="mb-0">Satisfação garantida ou seu dinheiro de volta</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="container mb-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Nossas Soluções Científicas</h2>
+            <p class="lead text-muted">Produtos desenvolvidos para seu bem-estar integral</p>
+        </div>
+        
+        <div class="row">
+            <!-- Chá para Gastrite -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2" class="card-img-top product-img" alt="Chá para Gastrite">
+                        <div class="badge-discount">10% OFF</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="scientific-badge">Pesquisa Aprovada</span>
+                        <h5 class="card-title mt-2">Chá para Gastrite</h5>
+                        <p class="card-text text-muted">Formulação científica para alívio da gastrite e proteção da mucosa gástrica.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">899 <span class="currency">MT</span></h5>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart" data-product="Chá para Gastrite" data-price="899">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-primary w-100 buy-now" data-product="Chá para Gastrite">
+                            <i class="fab fa-whatsapp me-2"></i>Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chá para Ansiedade -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348" class="card-img-top product-img" alt="Chá para Ansiedade">
+                        <div class="badge-discount">10% OFF</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="scientific-badge">Estudo Clínico</span>
+                        <h5 class="card-title mt-2">Chá para Ansiedade</h5>
+                        <p class="card-text text-muted">Combinação de ervas para redução do estresse e promoção de relaxamento.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">899 <span class="currency">MT</span></h5>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart" data-product="Chá para Ansiedade" data-price="899">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-primary w-100 buy-now" data-product="Chá para Ansiedade">
+                            <i class="fab fa-whatsapp me-2"></i>Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chá para Impotência -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d" class="card-img-top product-img" alt="Chá para Impotência">
+                        <div class="badge-discount">10% OFF</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="scientific-badge">Comprovado</span>
+                        <h5 class="card-title mt-2">Chá para Impotência</h5>
+                        <p class="card-text text-muted">Solução natural para melhora da performance e vitalidade masculina.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">899 <span class="currency">MT</span></h5>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart" data-product="Chá para Impotência" data-price="899">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-primary w-100 buy-now" data-product="Chá para Impotência">
+                            <i class="fab fa-whatsapp me-2"></i>Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chá para Perda de Peso -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1553531889-56cc480ac5cb" class="card-img-top product-img" alt="Chá para Perda de Peso">
+                        <div class="badge-discount">10% OFF</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="scientific-badge">Eficácia Testada</span>
+                        <h5 class="card-title mt-2">Chá para Perda de Peso</h5>
+                        <p class="card-text text-muted">Acelerador metabólico natural para auxílio no emagrecimento saudável.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">899 <span class="currency">MT</span></h5>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart" data-product="Chá para Perda de Peso" data-price="899">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-primary w-100 buy-now" data-product="Chá para Perda de Peso">
+                            <i class="fab fa-whatsapp me-2"></i>Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ebook Prosperidade com Deus -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c" class="card-img-top product-img" alt="Ebook Prosperidade com Deus">
+                    </div>
+                    <div class="card-body">
+                        <span class="scientific-badge">Método Validado</span>
+                        <h5 class="card-title mt-2">Ebook Prosperidade com Deus</h5>
+                        <p class="card-text text-muted">Guia científico-espiritual para alcançar prosperidade financeira e paz interior.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">199 <span class="currency">MT</span></h5>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart" data-product="Ebook Prosperidade com Deus" data-price="199">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-primary w-100 buy-now" data-product="Ebook Prosperidade com Deus">
+                            <i class="fab fa-whatsapp me-2"></i>Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ebook Melhor Profissional do Mundo -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" class="card-img-top product-img" alt="Ebook Melhor Profissional do Mundo">
+                    </div>
+                    <div class="card-body">
+                        <span class="scientific-badge">Baseado em Ciência</span>
+                        <h5 class="card-title mt-2">Ebook Melhor Profissional do Mundo</h5>
+                        <p class="card-text text-muted">Técnicas comprovadas para excelência profissional e realização pessoal.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">199 <span class="currency">MT</span></h5>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart" data-product="Ebook Melhor Profissional do Mundo" data-price="199">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-primary w-100 buy-now" data-product="Ebook Melhor Profissional do Mundo">
+                            <i class="fab fa-whatsapp me-2"></i>Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ebook Vença Impotência de Forma Natural -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646" class="card-img-top product-img" alt="Ebook Vença Impotência de Forma Natural">
+                    </div>
+                    <div class="card-body">
+                        <span class="scientific-badge">Pesquisa Aplicada</span>
+                        <h5 class="card-title mt-2">Ebook Vença Impotência Naturalmente</h5>
+                        <p class="card-text text-muted">Método natural baseado em evidências para superação da disfunção erétil.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">399 <span class="currency">MT</span></h5>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart" data-product="Ebook Vença Impotência de Forma Natural" data-price="399">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <button class="btn btn-primary w-100 buy-now" data-product="Ebook Vença Impotência de Forma Natural">
+                            <i class="fab fa-whatsapp me-2"></i>Comprar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef" class="img-fluid rounded shadow" alt="Sobre Nós">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Sobre a Feeling Good</h2>
+                    <p class="lead">Consultoria Científica especializada em soluções naturais para saúde e bem-estar.</p>
+                    <p>Nossa missão é traduzir pesquisas científicas em produtos acessíveis que realmente fazem diferença na qualidade de vida das pessoas.</p>
+                    <p>Com uma equipe multidisciplinar de pesquisadores e terapeutas, desenvolvemos formulações exclusivas que combinam sabedoria tradicional com comprovação científica.</p>
+                    <button class="btn btn-primary mt-3" id="whatsappBtn2">
+                        <i class="fab fa-whatsapp me-2"></i>Agende uma Consultoria
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Entre em Contato</h2>
+                <p class="lead text-muted">Tire suas dúvidas ou agende uma consultoria</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-envelope me-2 text-primary"></i>Email</h5>
+                            <p class="card-text">crlsantoniosorce@gmail.com</p>
+                            
+                            <h5 class="card-title mt-4"><i class="fas fa-phone me-2 text-primary"></i>Telefone/WhatsApp</h5>
+                            <p class="card-text">+258 87 836 9400</p>
+                            
+                            <h5 class="card-title mt-4"><i class="fas fa-clock me-2 text-primary"></i>Horário de Atendimento</h5>
+                            <p class="card-text">Segunda a Sexta: 8h às 18h<br>Sábado: 9h às 13h</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Envie uma Mensagem</h5>
+                            <form>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Seu Nome">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Seu Email">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="tel" class="form-control" placeholder="Seu Telefone">
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="4" placeholder="Sua Mensagem"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar Mensagem
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-4">Feeling Good</h5>
+                    <p>Consultoria Científica e Serviços especializados em saúde natural e bem-estar.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-4">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Início</a></li>
+                        <li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produtos</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white text-decoration-none">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contato</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Termos de Serviço</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4">Newsletter</h5>
+                    <p>Assine para receber dicas científicas de saúde e ofertas exclusivas.</p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Seu Email">
+                            <button class="btn btn-primary" type="button">Assinar</button>
+                        </div>
+                    </form>
+                    <p><i class="fas fa-lock me-2"></i> Seus dados estão seguros conosco</p>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 Feeling Good Consultoria Científica e Serviços. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="#" class="whatsapp-float" id="whatsappFloat">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Cart Button -->
+    <button class="btn btn-primary rounded-circle cart-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">0</span>
+    </button>
+
+    <!-- Cart Offcanvas -->
+    <div class="offcanvas offcanvas-end offcanvas-cart" tabindex="-1" id="cartOffcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Seu Carrinho</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="cart-items">
+                <!-- Cart items will be added here dynamically -->
+                <p class="text-muted text-center empty-cart-message">Seu carrinho está vazio</p>
+            </div>
+            <div class="cart-summary mt-auto border-top pt-3 d-none">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span class="cart-subtotal">0 MT</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Desconto:</span>
+                    <span class="cart-discount">0 MT</span>
+                </div>
+                <div class="d-flex justify-content-between fw-bold fs-5">
+                    <span>Total:</span>
+                    <span class="cart-total">0 MT</span>
+                </div>
+                <button class="btn btn-primary w-100 mt-3 checkout-btn">
+                    <i class="fab fa-whatsapp me-2"></i>Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // WhatsApp Configuration
+        const whatsappNumber = "258878369400";
+        
+        // Cart functionality
+        let cart = [];
+        
+        // Initialize cart from localStorage
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            updateCartBadge();
+        }
+        
+        // Add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.getAttribute('data-product');
+                const price = parseFloat(this.getAttribute('data-price'));
+                
+                addToCart(product, price);
+            });
+        });
+        
+        // Buy now buttons
+        document.querySelectorAll('.buy-now').forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.getAttribute('data-product');
+                const price = parseFloat(this.closest('.product-card').querySelector('.add-to-cart').getAttribute('data-price'));
+                
+                // Clear cart and add only this product
+                cart = [{ product, price, quantity: 1 }];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartBadge();
+                
+                // Open cart and proceed to checkout
+                const offcanvas = new bootstrap.Offcanvas(document.getElementById('cartOffcanvas'));
+                offcanvas.show();
+                
+                // Trigger checkout after a small delay to allow cart to update
+                setTimeout(() => {
+                    checkout();
+                }, 500);
+            });
+        });
+        
+        // WhatsApp buttons
+        document.querySelectorAll('#whatsappBtn, #whatsappBtn2, #whatsappFloat').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                let message = "Olá, tenho dúvidas sobre os produtos da Feeling Good. Poderia me ajudar?";
+                
+                if (this.classList.contains('buy-now') || this.classList.contains('checkout-btn')) {
+                    message = generateWhatsAppMessage();
+                } else if (this.id === 'whatsappBtn2') {
+                    message = "Olá, gostaria de agendar uma consultoria científica com a Feeling Good.";
+                }
+                
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        });
+        
+        // Checkout button in cart
+        document.querySelector('.checkout-btn')?.addEventListener('click', checkout);
+        
+        // Function to add item to cart
+        function addToCart(product, price) {
+            const existingItem = cart.find(item => item.product === product);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ product, price, quantity: 1 });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+            updateCartUI();
+            
+            // Show toast notification
+            showToast(`${product} foi adicionado ao carrinho!`);
+        }
+        
+        // Function to update cart badge
+        function updateCartBadge() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-badge').textContent = totalItems;
+        }
+        
+        // Function to update cart UI
+        function updateCartUI() {
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const cartSummary = document.querySelector('.cart-summary');
+            const emptyCartMessage = document.querySelector('.empty-cart-message');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-muted text-center empty-cart-message">Seu carrinho está vazio</p>';
+                cartSummary.classList.add('d-none');
+                return;
+            }
+            
+            emptyCartMessage?.remove();
+            cartSummary.classList.remove('d-none');
+            
+            let html = '';
+            let subtotal = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                html += `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-1">${item.product}</h6>
+                                    <small class="text-muted">${item.price} MT × ${item.quantity}</small>
+                                </div>
+                                <div class="text-end">
+                                    <div class="fw-bold">${itemTotal} MT</div>
+                                    <div class="btn-group btn-group-sm mt-1">
+                                        <button class="btn btn-outline-secondary decrease-quantity" data-index="${index}">-</button>
+                                        <button class="btn btn-outline-secondary increase-quantity" data-index="${index}">+</button>
+                                        <button class="btn btn-outline-danger remove-item" data-index="${index}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItemsContainer.innerHTML = html;
+            
+            // Calculate discount (example: 10% discount for 3 or more items)
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const discount = totalItems >= 3 ? subtotal * 0.1 : 0;
+            const total = subtotal - discount;
+            
+            document.querySelector('.cart-subtotal').textContent = `${subtotal} MT`;
+            document.querySelector('.cart-discount').textContent = `${discount} MT`;
+            document.querySelector('.cart-total').textContent = `${total} MT`;
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart[index].quantity += 1;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartBadge();
+                    updateCartUI();
+                });
+            });
+            
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity -= 1;
+                    } else {
+                        cart.splice(index, 1);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartBadge();
+                    updateCartUI();
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartBadge();
+                    updateCartUI();
+                });
+            });
+        }
+        
+        // Function to generate WhatsApp message for checkout
+        function generateWhatsAppMessage() {
+            let message = "Olá, gostaria de comprar os seguintes itens da Feeling Good:\n\n";
+            
+            cart.forEach(item => {
+                message += `- ${item.product} (${item.quantity}x) - ${item.price * item.quantity} MT\n`;
+            });
+            
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const discount = totalItems >= 3 ? subtotal * 0.1 : 0;
+            const total = subtotal - discount;
+            
+            message += `\nSubtotal: ${subtotal} MT`;
+            if (discount > 0) {
+                message += `\nDesconto (10%): ${discount} MT`;
+            }
+            message += `\nTotal: ${total} MT`;
+            
+            message += "\n\nPor favor, informe como proceder com o pagamento e entrega.";
+            
+            return message;
+        }
+        
+        // Function to handle checkout
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('Seu carrinho está vazio!', 'danger');
+                return;
+            }
+            
+            const message = generateWhatsAppMessage();
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+        
+        // Function to show toast notifications
+        function showToast(message, type = 'success') {
+            const toastContainer = document.createElement('div');
+            toastContainer.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
+            toastContainer.style.zIndex = '1100';
+            toastContainer.setAttribute('role', 'alert');
+            toastContainer.setAttribute('aria-live', 'assertive');
+            toastContainer.setAttribute('aria-atomic', 'true');
+            
+            toastContainer.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+            
+            document.body.appendChild(toastContainer);
+            
+            const toast = new bootstrap.Toast(toastContainer);
+            toast.show();
+            
+            // Remove toast after it's hidden
+            toastContainer.addEventListener('hidden.bs.toast', function() {
+                document.body.removeChild(toastContainer);
+            });
+        }
+        
+        // Initialize cart UI when offcanvas is shown
+        document.getElementById('cartOffcanvas').addEventListener('shown.bs.offcanvas', function() {
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>
