@@ -443,29 +443,48 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title mb-4">Envie uma Mensagem</h5>
-                            <form>
+                            <form id="contactForm">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Seu Nome">
+                                    <input type="text" id="contactName" class="form-control" placeholder="Seu Nome" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="email" class="form-control" placeholder="Seu Email">
+                                    <input type="email" id="contactEmail" class="form-control" placeholder="Seu Email" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="tel" class="form-control" placeholder="Seu Telefone">
+                                    <input type="tel" id="contactPhone" class="form-control" placeholder="Seu Telefone">
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="form-control" rows="4" placeholder="Sua Mensagem"></textarea>
+                                    <textarea id="contactMessage" class="form-control" rows="4" placeholder="Sua Mensagem" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">
                                     <i class="fas fa-paper-plane me-2"></i>Enviar Mensagem
                                 </button>
                             </form>
+                            <p class="small text-muted mt-2">Ao enviar, você concorda com nossa <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Política de Privacidade</a>.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Privacy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Política de Privacidade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Nós respeitamos sua privacidade. Seus dados serão usados apenas para responder sua mensagem e não serão compartilhados com terceiros.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-5">
@@ -493,10 +512,10 @@
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-4">Newsletter</h5>
                     <p>Assine para receber dicas científicas de saúde e ofertas exclusivas.</p>
-                    <form class="mb-3">
+                    <form id="newsletterForm" class="mb-3">
                         <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Seu Email">
-                            <button class="btn btn-primary" type="button">Assinar</button>
+                            <input type="email" id="newsletterEmail" class="form-control" placeholder="Seu Email" required>
+                            <button class="btn btn-primary" type="submit">Assinar</button>
                         </div>
                     </form>
                     <p><i class="fas fa-lock me-2"></i> Seus dados estão seguros conosco</p>
@@ -528,7 +547,6 @@
         </div>
         <div class="offcanvas-body">
             <div class="cart-items">
-                <!-- Cart items will be added here dynamically -->
                 <p class="text-muted text-center empty-cart-message">Seu carrinho está vazio</p>
             </div>
             <div class="cart-summary mt-auto border-top pt-3 d-none">
@@ -615,6 +633,32 @@
         
         // Checkout button in cart
         document.querySelector('.checkout-btn')?.addEventListener('click', checkout);
+        
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const telefone = document.getElementById('contactPhone').value;
+            const mensagem = document.getElementById('contactMessage').value;
+            
+            const assunto = `Mensagem de ${nome} - Feeling Good`;
+            const corpo = `Nome: ${nome}%0AEmail: ${email}%0ATelefone: ${telefone}%0A%0AMensagem:%0A${mensagem}`;
+            
+            window.location.href = `mailto:crlsantoniosorce@gmail.com?subject=${assunto}&body=${corpo}`;
+            
+            alert("Obrigado por sua mensagem! Uma janela de e-mail será aberta. Basta clicar em 'Enviar' para finalizar.");
+            this.reset();
+        });
+        
+        // Newsletter Form
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            alert(`Obrigado por assinar nossa newsletter! Enviaremos novidades para: ${email}`);
+            this.reset();
+        });
         
         // Function to add item to cart
         function addToCart(product, price) {
